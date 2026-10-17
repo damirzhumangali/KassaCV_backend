@@ -1,8 +1,0 @@
-.git
-__pycache__
-.env
-data
-uploads
-results
-models/*
-!models/.gitkeep
