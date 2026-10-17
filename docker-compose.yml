@@ -14,6 +14,7 @@ services:
       - "${PORT:-8000}:8000"
     volumes:
       - backend_data:/data
+      - ./models:/models:ro
     depends_on:
       - worker
   worker:
@@ -22,10 +23,13 @@ services:
     command: ["python", "-m", "app.worker_process"]
     environment:
       DATA_DIR: /data
+      MODELS_DIR: /models
       JOB_DEADLINE_SEC: ${JOB_DEADLINE_SEC:-240}
       RESULT_TTL_HOURS: ${RESULT_TTL_HOURS:-24}
     volumes:
       - backend_data:/data
+      - ./models:/models:ro
     # Add a GPU reservation here when deploying on a host with NVIDIA Container Toolkit.
+
 volumes:
   backend_data:

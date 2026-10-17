@@ -33,3 +33,9 @@ def worker_loop(store: JobStore, stop: threading.Event) -> None:
             remove_file(video_path)
             for expired_path in store.purge_expired(settings.result_ttl_hours):
                 remove_file(expired_path)
+
+
+if __name__ == "__main__":
+    from app.worker_process import main
+    main()
+

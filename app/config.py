@@ -13,7 +13,12 @@ class Settings:
         self.max_queue_size = int(os.getenv("MAX_QUEUE_SIZE", "50"))
         self.result_ttl_hours = int(os.getenv("RESULT_TTL_HOURS", "24"))
         self.job_deadline_sec = int(os.getenv("JOB_DEADLINE_SEC", "240"))
+        self.frame_sample_fps = float(os.getenv("FRAME_SAMPLE_FPS", "3.0"))
+        self.device = os.getenv("DEVICE", "cpu")
+        self.models_dir = Path(os.getenv("MODELS_DIR", str(Path(__file__).parent.parent / "models")))
+        self.mock_pipeline = os.getenv("MOCK_PIPELINE", "false").lower() in {"1", "true", "yes"}
         self.api_keys = tuple(k.strip() for k in os.getenv("API_KEYS", "").split(",") if k.strip())
+
 
 
 @lru_cache
